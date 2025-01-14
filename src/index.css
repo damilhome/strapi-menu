@@ -431,7 +431,6 @@ NavLinks
     align-self: stretch;
     display: grid;
     grid-template-columns: auto 1fr;
-    /* border: 2px solid red; */
   }
   .logo {
     align-self: center;
@@ -445,7 +444,6 @@ NavLinks
     text-transform: capitalize;
     letter-spacing: var(--letterSpacing);
     cursor: pointer;
-    /* border: 2px solid green; */
   }
 }
 
@@ -463,7 +461,7 @@ Submenu
   .submenu {
     display: block;
     position: fixed;
-    top: 6rem;
+    top: 7rem;
     left: 50%;
     width: var(--fluid-width);
     max-width: var(--max-width);
@@ -477,13 +475,15 @@ Submenu
     /* toggle stuff */
     visibility: hidden;
     opacity: 0;
-    transition: transform 0.3s ease-in-out, opacity 0.2s ease-in-out;
-    /* border: 2px solid red; */
+    transition: transform 0.3s ease-in-out, visibility 0.3s ease-in-out, opacity 0.2s ease-in-out, z-index 0.2s ease-in-out;
+    z-index: -1;
   }
   .show-submenu {
     opacity: 1;
     visibility: visible;
-    transform: rotateX(0deg) translate(-50%);
+    transform: rotateX(0deg) translateX(-50%);
+    transition: transform 0.3s ease-in-out, visibility 0.3s ease-in-out, opacity 0.2s ease-in-out, z-index 0.2s ease-in-out;
+    z-index: 10;
     
   }
   .submenu h5 {

@@ -1,28 +1,43 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import useGlobalContext from './context/AppContext';
 import sublinks from './data';
 
 const Submenu = () => {
     const { pageId, setPageId } = useGlobalContext();
-    const [submenuItem, setSubmenuItem] = useState(null);
+    const submenuContainer = useRef(null);
+    const [currentPage, setCurrentPage] = useState(null);
 
     useEffect(() => {
-        setSubmenuItem(sublinks.find((link) => link.pageId === pageId));
-    }, [pageId]);
+      if(pageId) {
+        setCurrentPage(sublinks.find((link) => link.pageId === pageId));
+      }
+    }, [pageId])
 
-    if (!submenuItem) {
-        return null;
-    }
+    const handleMouseLeave = (e) => {
+        const submenu = submenuContainer.current;
+        const { left, right, bottom } = submenu.getBoundingClientRect();
+        const { clientX, clientY } = e;
+
+        if (clientX < left - 1 || clientX > right - 1 || clientY > bottom - 1) {
+            setPageId(null);
+        }
+    };
 
     return (
         <div
             className={`submenu ${pageId ? 'show-submenu' : ''}`}
-            onMouseOver={() => setPageId(pageId)}
-            onMouseOut={() => setPageId(null)}
+            onMouseLeave={handleMouseLeave}
+            ref={submenuContainer}
         >
-            <h5>{submenuItem.page}</h5>
-            <div className="submenu-links">
-                {submenuItem.links.map((link) => {
+            <h5>{currentPage?.page}</h5>
+            <div
+                className="submenu-links"
+                style={{
+                    gridTemplateColumns:
+                        currentPage?.links?.length > 3 ? '1fr 1fr' : '1fr',
+                }}
+            >
+                {currentPage?.links?.map((link) => {
                     const { id, label, icon, url } = link;
                     return (
                         <a href={url} key={id}>
