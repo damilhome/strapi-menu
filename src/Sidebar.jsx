@@ -8,7 +8,6 @@ const Sidebar = () => {
     return (
         <aside
             className={`sidebar ${isSidebarOpen ? 'show-sidebar' : ''}`}
-            onMouseOut={() => setPageId(null)}
         >
             <div className="sidebar-container">
                 <button className="close-btn" onClick={closeSidebar}>

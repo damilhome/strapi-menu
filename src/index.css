@@ -295,7 +295,7 @@ nav {
   border-color: transparent;
   transition: var(--transition);
   cursor: pointer;
-  
+
   display: flex;
   justify-content: center;
   align-items: center;
@@ -358,7 +358,7 @@ Sidebar
   /* toggle stuff */
   opacity: 0;
   visibility: hidden;
-  transition: opacity 1s, visibility 1s;
+  transition: opacity 0.5s, visibility 0.5s;
 }
 /* toggle class */
 .show-sidebar {

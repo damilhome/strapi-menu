@@ -7,7 +7,6 @@ export const AppContextProvider = ({ children }) => {
     const [pageId, setPageId] = useState(null);
 
     const openSidebar = () => {
-        console.log('clicked to open');
         setIsSidebarOpen(true);
     };
 
